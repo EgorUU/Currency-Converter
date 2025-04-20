@@ -38,26 +38,26 @@ const Chart: React.FC = ( ) => {
 
             ctx.beginPath();
             ctx.lineWidth = 3
-            // Рассчитываем коэффициент для равномерного распределения по осям
+            
             const widthStep = chart?.current?.offsetWidth! / (new Date().getDay() === 0 ? 7 : new Date().getDay());
             console.log(widthStep);
             
             currenciesDatas.forEach((num: number, index: number) => {
-                // Нормируем значение по высоте
+                
                 const positionY = canvasHeight - (num - minValue) / (maxValue - minValue) * canvasHeight;
 
                 if (index === 0) {
-                    // const positionX = widthStep / 2;
-                    ctx.moveTo(widthStep / 2, positionY); // Ставим начальную точку
+                    
+                    ctx.moveTo(widthStep / 2, positionY); 
                 } 
                 else {
                     
-                    ctx.lineTo( index * widthStep + (widthStep / 2), positionY); // Соединим точки
+                    ctx.lineTo( index * widthStep + (widthStep / 2), positionY); 
                 }
             });
 
-            ctx.strokeStyle = 'rgba(31, 108, 159, 1)'; // Устанавливаем цвет линии
-            ctx.stroke(); // Прорисовываем линию
+            ctx.strokeStyle = 'rgba(31, 108, 159, 1)'; 
+            ctx.stroke(); 
         }
     }
     useEffect(() => {
@@ -84,8 +84,7 @@ const Chart: React.FC = ( ) => {
                     const formattedDate = `${dayOfPreviousDate}.${monthOfPreviousDate > 9 ? monthOfPreviousDate : `0${monthOfPreviousDate}`}.${yearOfPreviousDate}`;
 
 
-                    const response = await axios.post('http://localhost:4000/week', {data: formattedDate});    
-                    
+                    const response = await axios.post('http://localhost:4000/week', {data: formattedDate}); 
                                 
                     const currenciesData = response.data
                     
@@ -129,16 +128,16 @@ const Chart: React.FC = ( ) => {
               
                   ctx.beginPath();
               
-                  // Рассчитываем коэффициент для равномерного распределения по осям
+                  
                   const widthStep = chart?.current?.offsetWidth! / (new Date().getDay() === 0 ? 7 : new Date().getDay());
               
-                  // Радиус круга
+                  
                   const radius = 3;
               
                   const num = currenciesDatas[i];
                   const positionY = canvasHeight - (num - minValue) / (maxValue - minValue) * canvasHeight;
               
-                  // Координаты центра круга
+                  
                   const circleX = i * widthStep + (widthStep / 2);
                   const circleY = positionY;
                     ctx.textAlign = 'center';
@@ -146,14 +145,14 @@ const Chart: React.FC = ( ) => {
                     ctx.font = 'bold 16px sans-serif';
                     ctx.fillText(`${currenciesDatas[i]} ${currentCurrency2}`, circleX + 40, circleY - 15);
                     ctx.fillStyle = 'black'
-                  // Рисуем круг
+                  
                   ctx.beginPath();
-                  ctx.arc(circleX, circleY, radius, 0, Math.PI * 2); // Круг (центр X, центр Y, радиус, начальный угол, конечный угол)
-                  ctx.fillStyle = 'black'; // Черный цвет
-                  ctx.fill(); // Заполняем круг
+                  ctx.arc(circleX, circleY, radius, 0, Math.PI * 2); 
+                  ctx.fillStyle = 'black'; 
+                  ctx.fill(); 
               
-                  // *** ВАЖНО ***
-                  // strokeStyle и stroke() больше не требуются здесь, так как мы работаем только с fill-style и fill()
+                  
+                  
                 }}
                 style={{ width: `${chart?.current?.offsetWidth / (new Date().getDay() === 0 ? 7 : new Date().getDay())}px` }}
               ></div>)
