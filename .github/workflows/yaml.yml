@@ -11,7 +11,7 @@ jobs:
     permissions:  # 👈 Добавьте этот блок!
       contents: write  # Разрешить запись в репозиторий
       pages: write     # Разрешить деплой на GitHub Pages
-      id-token: read   # Нужно для работы с GitHub OIDC
+      id-token: write   # Нужно для работы с GitHub OIDC
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
