@@ -1,0 +1,12 @@
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    h1 {
+        font-size: 20px;
+        margin: 0;
+        &:hover {
+            color: #da5353;
+        }
+    }
+
+}
