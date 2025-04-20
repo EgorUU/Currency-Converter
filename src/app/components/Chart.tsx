@@ -1,5 +1,5 @@
 'use client'
-
+import { NEXT_PUBLIC_API_URL } from '@/varibles/values'
 import { useSelector } from "react-redux"
 import { ReactNode, useEffect, useRef, useState } from "react"
 import { RootState } from '@/store/store'
@@ -84,7 +84,7 @@ const Chart: React.FC = ( ) => {
                     const formattedDate = `${dayOfPreviousDate}.${monthOfPreviousDate > 9 ? monthOfPreviousDate : `0${monthOfPreviousDate}`}.${yearOfPreviousDate}`;
 
 
-                    const response = await axios.post('http://localhost:4000/week', {data: formattedDate}); 
+                    const response = await axios.post(NEXT_PUBLIC_API_URL + '/week' as string, {data: formattedDate}); 
                                 
                     const currenciesData = response.data
                     

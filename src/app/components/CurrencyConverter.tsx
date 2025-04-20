@@ -2,6 +2,7 @@
 import '@/scss/currency.scss'
 import { GoArrowSwitch } from "react-icons/go"
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'react-bootstrap' 
+import { NEXT_PUBLIC_API_URL } from '@/varibles/values'
 import { IReducer } from '@/store/reducers/currentCurrencyes'
 import { useSelector, useDispatch } from 'react-redux'
 import { setFirstCurrentCurrency, setSecondCurrentCurrency } from '@/store/reducers/currentCurrencyes'
@@ -21,7 +22,7 @@ const CurrencyConverter: React.FC = () => {
     const { data, isLoading,  isSuccess, isError, error } = useQuery<any>({
         queryKey: ['currencies'],
         queryFn: async () => {
-            const response = await axios.get('http://localhost:4000');
+            const response = await axios.get(NEXT_PUBLIC_API_URL as string);
             return response.data;
         },
         
