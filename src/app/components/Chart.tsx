@@ -28,7 +28,7 @@ const Chart: React.FC = ( ) => {
     const [currenciesDatas, setCurrenciesDatas] = useState<any>([].reverse())
     const canvas = useRef<HTMLCanvasElement | null>(null)
     const showChart = () => {
-        if (currenciesDatas.length == (new Date().getDay() === 0 ? 7 : new Date().getDay())) {
+        if (currenciesDatas.length == 7) {
             const ctx = canvas?.current!.getContext('2d') as CanvasRenderingContext2D;
             ctx.clearRect(0, 0, canvas?.current!.width!, canvas?.current!.height!);
 
@@ -39,7 +39,7 @@ const Chart: React.FC = ( ) => {
             ctx.beginPath();
             ctx.lineWidth = 3
             
-            const widthStep = chart?.current?.offsetWidth! / (new Date().getDay() === 0 ? 7 : new Date().getDay());
+            const widthStep = chart?.current?.offsetWidth! / currenciesDatas.length;
             console.log(widthStep);
             
             currenciesDatas.forEach((num: number, index: number) => {
@@ -62,7 +62,11 @@ const Chart: React.FC = ( ) => {
     }
     useEffect(() => {
         
-           showChart()     
+           if (currenciesDatas.length > 0)      {
+            console.log(currenciesDatas);
+            
+            showChart()
+           }
 
         
         
@@ -72,7 +76,7 @@ const Chart: React.FC = ( ) => {
         queryKey: ['data'],
         queryFn: async () => {
             setCurrenciesDatas([])
-            for (let i = 0; i < (new Date().getDay() === 0 ? 7 : new Date().getDay()); i++) {
+            for (let i = 0; i < 7; i++) {
                 try {
                     const today = new Date();
                     const previousDate = new Date(today.getTime() - i * 24 * 60 * 60 * 1000);
@@ -100,12 +104,12 @@ const Chart: React.FC = ( ) => {
         }
     })
     useEffect(() => {
-        if (isSuccess) console.log('success')
+        if (isSuccess) console.log(currenciesDatas)
         if (isError) console.error('error')
     }, [])
     const showBlocks = () => {
         const blocks = []
-        for (let i = 0; i < (new Date().getDay() === 0 ? 7 : new Date().getDay()); i++) {
+        for (let i = 0; i < currenciesDatas.length; i++) {
             console.log('ew');
             
             blocks.push(
@@ -129,7 +133,7 @@ const Chart: React.FC = ( ) => {
                   ctx.beginPath();
               
                   
-                  const widthStep = chart?.current?.offsetWidth! / (new Date().getDay() === 0 ? 7 : new Date().getDay());
+                  const widthStep = chart?.current?.offsetWidth! / currenciesDatas.length;
               
                   
                   const radius = 3;
@@ -154,7 +158,7 @@ const Chart: React.FC = ( ) => {
                   
                   
                 }}
-                style={{ width: `${chart?.current?.offsetWidth / (new Date().getDay() === 0 ? 7 : new Date().getDay())}px` }}
+                style={{ width: `${chart?.current?.offsetWidth / currenciesDatas.length}px` }}
               ></div>)
         }
         return blocks
@@ -165,8 +169,8 @@ const Chart: React.FC = ( ) => {
             'Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня',
             'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'
           ];
-        for (let i = 0; i < (new Date().getDay() === 0 ? 7 : new Date().getDay()); i++) {
-            days.push(<h1 style={{width: `${chart?.current?.offsetWidth / (new Date().getDay() === 0 ? 7 : new Date().getDay())}px`}}>{((new Date().getDate() - 6) + i) + ` ${months[new Date().getMonth() + 1]}`}</h1>)
+        for (let i = 0; i < currenciesDatas.length; i++) {
+            days.push(<h1 style={{width: `${chart?.current?.offsetWidth / 7}px`}}>{((new Date().getDate() - 6) + i) + ` ${months[new Date().getMonth() + 1]}`}</h1>)
         }
         return days
     }

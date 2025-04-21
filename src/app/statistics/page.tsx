@@ -16,7 +16,7 @@ const Statistics: React.FC = () => {
         <div className='choices'>
             <h1 className={ubuntu.className}>График изменения курса валюты</h1>
             <div className="choices-buttons">
-                <div className='choices-buttons-item week active'><h1>За неделю</h1></div>
+                <div className='choices-buttons-item week active'><h1>За последние 7 дней</h1></div>
             </div>
         </div>
         <Chart  />
