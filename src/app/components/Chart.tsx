@@ -170,7 +170,7 @@ const Chart: React.FC = ( ) => {
             'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'
           ];
         for (let i = 0; i < currenciesDatas.length; i++) {
-            days.push(<h1 style={{width: `${chart?.current?.offsetWidth / 7}px`}}>{((new Date().getDate() - 6) + i) + ` ${months[new Date().getMonth() + 1]}`}</h1>)
+            days.push(<h1 style={{width: `${chart?.current?.offsetWidth / 7}px`}}>{((new Date().getDate() - 6) + i) + ` ${months[new Date().getMonth()]}`}</h1>)
         }
         return days
     }
@@ -193,3 +193,4 @@ const Chart: React.FC = ( ) => {
 }
 
 export default Chart
+
